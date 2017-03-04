@@ -6,7 +6,7 @@
 
 void testGraphics()
 {
-   Graphics window(800,600,"Game on");
+   Graphics window(800,600,"Game on"); //Test
    struct Tile_t rect={200,100,50,50,""};
    window.setBacground(sf::Color::Blue);
    window.draw(rect);
