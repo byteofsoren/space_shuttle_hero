@@ -24,7 +24,7 @@ void Graphics::draw(sf::RectangleShape rect) {
     this->win.draw(rect);
 }
 void Graphics::draw(Tile_t tile) {
-    sf::RectangleShape rect(sf::Vector2f(tile.witdth, tile.height));
+    sf::RectangleShape rect(sf::Vector2f(tile.width, tile.height));
     rect.setPosition(tile.posX, tile.posY);
     this->draw(rect);
 }
@@ -43,7 +43,7 @@ void Graphics::update() {
     std::vector<Tile_t>::iterator it;
     this->tileMutex.lock();
     for(it = this->tiles.begin(); it != this->tiles.end(); it++){
-        sf::RectangleShape rect(sf::Vector2f(it->witdth, it->height));
+        sf::RectangleShape rect(sf::Vector2f(it->width, it->height));
         rect.setPosition(it->posX, it->posY);
         this->draw(rect);
     }

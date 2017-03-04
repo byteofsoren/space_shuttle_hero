@@ -8,7 +8,7 @@
 struct Tile_t{
     float posX;
     float posY;
-    float witdth;
+    float width;
     float height;
     std::string textureUrl;
 };
