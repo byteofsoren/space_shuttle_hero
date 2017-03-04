@@ -37,6 +37,7 @@ int Game::run() {
     this->renderer.update();
     this->renderer.run();
     while (this->renderer.isOpen()) {}
+    this->renderer.stop();
     std::cout << "Hello World!" << std::endl;
 
     return 0;

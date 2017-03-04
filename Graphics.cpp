@@ -79,4 +79,5 @@ void Graphics::run_funk() {
 }
 void Graphics::stop() {
     this->runnig = 0;
+    this->renThread.join();
 }

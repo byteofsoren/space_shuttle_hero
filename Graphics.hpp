@@ -18,6 +18,7 @@ class Graphics
 {
 public:
     Graphics (int w, int h, std::string title);
+    ~Graphics(){};
     void setBackground(sf::Color color);
     void setBackground(sf::Texture texture);
     void setBackground(std::string url);
