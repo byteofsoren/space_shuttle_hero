@@ -1,9 +1,8 @@
-#ifndef GRAPHICS 
+#ifndef GRAPHICS
 #define GRAPHICS
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <thread>
-#include <mutex>
 
 struct Tile_t{
     float posX;
@@ -19,31 +18,36 @@ class Graphics
 public:
     Graphics (int w, int h, std::string title);
     ~Graphics(){};
-    void setBackground(sf::Color color);
-    void setBackground(sf::Texture texture);
-    void setBackground(std::string url);
-    void draw(sf::RectangleShape rect);
-    void draw(Tile_t tile);
-    int addTile(Tile_t &tile);
-    bool isOpen();
+    void setBackground(sf::Color color){backColor = color;}
+    void setBackground(sf::Texture texture){backTexture = texture;}
+    void draw(sf::RectangleShape rect){win.draw(rect);}
+    bool isOpen(){return win.isOpen();}
+    bool tryUpdate(); //Redraw all tiles from
+    void startThreads(){runThread = std::thread(&Graphics::run_funk, this);}
     void removeTile(int tileNr);
-    void update();
-    void run();
-    void stop();
+    void addTile(Tile_t *tile);
 
 
 private:
     /* data */
     sf::RenderWindow win;
-    sf::Color color;
-    sf::Texture texture;
-    std::vector<Tile_t> tiles;
-    std::thread renThread;
+    sf::Color backColor;
+    sf::Texture backTexture;
+    std::vector<Tile_t *> tiles;
+    std::thread runThread;
     void run_funk();
     void stop_funk();
     pthread_t thread;
-    std::mutex tileMutex;
-    bool runnig;
+    bool userClosed() {
+        sf::Event event;
+        if (win.pollEvent(event)) {
+            if (event.type==sf::Event::Closed) {
+                win.close();
+                return true;
+            }
+        }
+        return false;
+    }
 };
 
 #endif
