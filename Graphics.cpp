@@ -1,4 +1,4 @@
-#include <Graphics.hpp>
+#include "Graphics.hpp"
 #include <iostream>
 
 Graphics::Graphics(int w, int h, std::string title) {
