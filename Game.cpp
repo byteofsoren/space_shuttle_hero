@@ -2,7 +2,9 @@
 #include "Game.hpp"
 
 Game::Game() : renderer(800, 800, "Space Shuttle Hero") {
-    // Fix renderers here
+    // Reset everything here
+
+    p1.setXPos = 
 }
 
 Game::~Game() {

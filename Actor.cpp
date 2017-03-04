@@ -6,6 +6,11 @@ Actor::Actor() {
     this->xVel = 0.0;
     this->yVel = 0.0;
     this->cr = 0.0;
+    this->tile.posX = 0.0;
+    this->tile.posY = 0.0;
+    this->tile.width = 0.0;
+    this->tile.height = 0.0;
+    this->tile.textureUrl = "";
 }
 
 Actor::~Actor() {
