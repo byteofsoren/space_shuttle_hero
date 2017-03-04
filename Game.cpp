@@ -13,23 +13,14 @@ Game::~Game() {
 }
 
 int Game::init() {
-    Tile_t e1 = {10, 10, 20, 20, ""};
-    std::vector<Actor> Actors;
+    std::vector<Actor*> actors;
+    Actor player1;
+    player1.setPos(10,100);
+    Actor player2;
+    player2.setPos(40,130);
+    renderer.addTile(player1.getTile());
+    renderer.addTile(player2.getTile());
 
-    Actors.push_back(Actor());
-    Actors.back().setXPos(10);
-    Actors.back().setYPos(10);
-    Actors.back().setXVel(1);
-    Actors.back().setYVel(1);
-
-    Actors.push_back(Actor());
-    Actors.back().setXPos(220);
-    Actors.back().setYPos(100);
-    Actors.back().setXVel(1);
-    Actors.back().setYVel(1);
-
-    this->renderer.addTile(this->obj1);
-    this->renderer.addTile(this->obj2);
     return 1;
 }
 

@@ -11,7 +11,6 @@ int main(/*int argc, char** argv*/) {
     //return 0;
     Game* g = new Game();
     int res;
-    
     if ((res = g->init())) {
         res = g->run();
     }

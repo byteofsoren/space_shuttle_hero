@@ -15,19 +15,20 @@ class Actor {
         void update();
         virtual void act(Actor &a);
 
-        void setXVel(double value)        { this->xVel = value; }
-        void setYVel(double value)        { this->yVel = value; }
-        void setXPos(double value)        { this->xPos = value; }
-        void setYPos(double value)        { this->yPos = value; }
-        void setCR(double value)          { this->cr = value; }
-        void setTile(const Tile_t& value) { this->tile = value; }
+        void setXVel(double value)     { this->xVel = value; }
+        void setYVel(double value)     { this->yVel = value; }
+        void setVel(double x, double y){ this->yVel = y; this->xVel = x; }
+        void setXPos(double value)     { this->xPos = value; }
+        void setYPos(double value)     { this->yPos = value; }
+        void setPos(double x, double y){ this->yPos = y; this->xPos = x; }
+        void setCR(double value)       { this->cr = value; }
 
-        const double getXVel()  { return this->xVel; }
-        const double getYVel()  { return this->yVel; }
-        const double getXPos()  { return this->xPos; }
-        const double getYPos()  { return this->yPos; }
-        const double getCR()    { return this->cr; }
-        const Tile_t& getTile() { return this->tile; }
+        double getXVel()  { return this->xVel; }
+        double getYVel()  { return this->yVel; }
+        double getXPos()  { return this->xPos; }
+        double getYPos()  { return this->yPos; }
+        double getCR()    { return this->cr; }
+        Tile_t *getTile() { return &tile; }
 };
 
 #endif
