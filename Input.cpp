@@ -1,4 +1,4 @@
-#include "input.hpp"
+#include "Input.hpp"
 
 bool Input::up() {
     return isKeyPressed(upKey);
