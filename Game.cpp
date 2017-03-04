@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Game.hpp"
+#include "Graphics.hpp"
 
 Game::Game() : renderer(800, 800, "Space Shuttle Hero") {
     // Reset everything here
@@ -12,10 +13,9 @@ Game::~Game() {
 }
 
 int Game::init() {
-    this->obj1.posX = 20.0;
-    this->obj1.posY = 20.0;
-    this->obj2.posX = 300.0;
-    this->obj2.posY = 300.0;
+    Tile_t e1 = {10, 10, 20, 20, ""}
+    std::vector<Actor> Actors;
+    Actors.push_back({});
 
     this->renderer.addTile(this->obj1);
     this->renderer.addTile(this->obj2);
