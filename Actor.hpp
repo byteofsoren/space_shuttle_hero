@@ -15,8 +15,8 @@ class Actor {
         void update();
         virtual void act(Actor &a);
 
-        void setXVel(double value) { this->setXVel = value; }
-        void setYVel(double value) { this->setYVel = value; }
-}
+        void setXVel(double value) { this->xVel = value; }
+        void setYVel(double value) { this->yVel = value; }
+};
 
 #endif

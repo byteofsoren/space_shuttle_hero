@@ -7,14 +7,14 @@ CC=$(CROSS_TOLL) g++
 TTY=/dev/pts/2
 ## Target is the source files with out .c or .cpp  tex main.c ~> main
 TARGET_C=
-TARGET_CPP=main Graphics Game input
+TARGET_CPP=Graphics Input Game Actor main
 OBJECTS_C=$(TARGET_C:=.o)
 OBJECTS_CPP=$(TARGET_CPP:=.o)
 ## EXECFILE is the name on the exe file you want
 EXECFILE=prog.out
 ## LFLAGS is the libary linker flags like -lncurses or -lpthread.
 LFLAGS_C=
-LFLAGS_CPP=-std=c++0x -lsfml-graphics -lsfml-window -lsfml-system -pthread
+LFLAGS_CPP=-std=c++0x -lsfml-system -lsfml-graphics -lsfml-window -pthread
 #LFLAGS=-lncurses -lm
 ## CFLAGS tells the copmiler to compile with diffrent flaggs mostly -g -Wall
 FLAGS_C=-g -Wall
@@ -32,7 +32,7 @@ $(TARGET_CPP):
 	$(CC) $(FLAGS_CPP) $(LFLAGS_CPP) -c $@.cpp
 
 all: clean $(TARGET_CPP) $(TARGET_C)
-	$(CC)  $(LFLAGS_CPP) $(FLAGS_CPP) $(OBJECTS_CPP) $(OBJECTS_C) -o $(EXECFILE)
+	$(CC) $(OBJECTS_CPP) $(OBJECTS_C) $(LFLAGS_CPP) $(FLAGS_CPP) -o $(EXECFILE)
 
 run: clean all
 	./$(EXECFILE)
