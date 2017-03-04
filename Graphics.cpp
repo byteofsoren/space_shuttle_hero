@@ -44,6 +44,7 @@ void Graphics::removeTile(int tileNr) {
     this->tileMutex.unlock();
 }
 void Graphics::update() {
+    //win.clear(this->color);    // Need a ifcase for bacground.
     std::vector<Tile_t>::iterator it;
     this->tileMutex.lock();
     for(it = this->tiles.begin(); it != this->tiles.end(); it++){

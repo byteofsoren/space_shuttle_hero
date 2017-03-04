@@ -8,11 +8,16 @@ void testGraphics()
 {
    Graphics window(800,600,"Game on"); //Test
    struct Tile_t rect={200,100,50,50,""};
+   struct Tile_t rect2={300,200,50,50,""};
    window.setBacground(sf::Color::Blue);
-   window.draw(rect);
+//   window.draw(rect);
+//   window.draw(rect2);
+    window.addTile(rect);
+    window.addTile(rect2);
    window.update();
    while (window.isOpen()) {
        std::cout << "Showing win"<<std::endl;
+       rect.posX ++;
    }
 
 }
