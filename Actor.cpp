@@ -8,8 +8,8 @@ Actor::Actor() {
     this->cr = 0.0;
     this->tile.posX = 0.0;
     this->tile.posY = 0.0;
-    this->tile.width = 0.0;
-    this->tile.height = 0.0;
+    this->tile.width = 100.0;
+    this->tile.height = 150.0;
     this->tile.textureUrl = "";
 }
 
