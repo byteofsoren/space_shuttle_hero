@@ -18,9 +18,9 @@ class Graphics
 {
 public:
     Graphics (int w, int h, std::string title);
-    void setBacground(sf::Color color);
-    void setBacground(sf::Texture texture);
-    void setBacground(std::string url);
+    void setBackground(sf::Color color);
+    void setBackground(sf::Texture texture);
+    void setBackground(std::string url);
     void draw(sf::RectangleShape rect);
     void draw(Tile_t tile);
     int addTile(Tile_t &tile);

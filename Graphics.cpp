@@ -7,13 +7,13 @@ Graphics::Graphics(int w, int h, std::string title) {
     this->win.display();
     this->runnig = 0;
 }
-void Graphics::setBacground(sf::Color color) {
+void Graphics::setBackground(sf::Color color) {
     this->color = color;
 }
-void Graphics::setBacground(sf::Texture texture) {
+void Graphics::setBackground(sf::Texture texture) {
     this->texture = texture;
 }
-void Graphics::setBacground(std::string url) {
+void Graphics::setBackground(std::string url) {
     sf::Texture texture;
     if (!texture.loadFromFile(url)) {
             std::cout<<"Error loading from file" <<std::endl;
