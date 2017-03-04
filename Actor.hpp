@@ -6,15 +6,17 @@
 class Actor {
     protected:
         Tile_t gfx;
-        int xPos, yPos;                // Position
-        int xVel, yVel;                // Velocity
-        double cr;                     // Collision radius
+        double xPos, yPos;                // Position
+        double xVel, yVel;                // Velocity
+        double cr;                        // Collision radius
     public:
         Actor();
         ~Actor();
-        void move();
-        void draw();
+        void update();
         virtual void act(Actor &a);
+
+        void setXVel(double value) { this->setXVel = value; }
+        void setYVel(double value) { this->setYVel = value; }
 }
 
 #endif
