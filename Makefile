@@ -7,7 +7,7 @@ CC=$(CROSS_TOLL) g++
 TTY=/dev/pts/2
 ## Target is the source files with out .c or .cpp  tex main.c ~> main
 TARGET_C=
-TARGET_CPP=main Graphics Game
+TARGET_CPP=main Graphics Game input
 OBJECTS_C=$(TARGET_C:=.o)
 OBJECTS_CPP=$(TARGET_CPP:=.o)
 ## EXECFILE is the name on the exe file you want
