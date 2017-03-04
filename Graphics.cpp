@@ -46,17 +46,19 @@ void Graphics::update() {
         sf::RectangleShape rect(sf::Vector2f(it->witdth, it->height));
         rect.setPosition(it->posX, it->posY);
         this->draw(rect);
-    } // Test // Test // Test
+    }
     this->tileMutex.unlock();
 }
 
 void Graphics::run() {
-    while (this->runnig) {
+    this->runnig = 1;
+    this->renThread = std::thread(&Graphics::run_funk, this);
+}
+
+void Graphics::run_funk() {
+     while (this->runnig) {
         this->update();
     }
-}
-void Graphics::run_funk() {
-    
 }
 void Graphics::stop() {
     this->runnig = 0;
