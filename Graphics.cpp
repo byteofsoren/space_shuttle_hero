@@ -36,6 +36,8 @@ int Graphics::addTile(Tile_t &tile) {
     return this->tiles.size();
 }
 bool Graphics::isOpen() {
+    //std::cout << "isOpen" << std::endl;
+    //std::cout << win.isOpen() << std::endl;
     return win.isOpen();
 }
 void Graphics::removeTile(int tileNr) {
@@ -63,10 +65,12 @@ void Graphics::run() {
 
 void Graphics::run_funk() {
      while (this->isOpen()) {
+        std::cout << "run_funk" << std::endl;
         sf::Event event;
         while (win.pollEvent(event)) {
             if (event.type==sf::Event::Closed) {
                 win.close();
+                std::cout << "Closed winodw" << std::endl;
                 this->runnig = 0;
             }
         }

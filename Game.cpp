@@ -15,6 +15,7 @@ Game::~Game() {
 int Game::init() {
     Tile_t e1 = {10, 10, 20, 20, ""};
     std::vector<Actor> Actors;
+
     Actors.push_back(Actor());
     Actors.back().setXPos(10);
     Actors.back().setYPos(10);
@@ -29,14 +30,14 @@ int Game::init() {
 
     this->renderer.addTile(this->obj1);
     this->renderer.addTile(this->obj2);
-        
     return 1;
 }
 
 int Game::run() {
     this->renderer.update();
-    
+    this->renderer.run();
+    while (this->renderer.isOpen()) {}
     std::cout << "Hello World!" << std::endl;
-        
+
     return 0;
 }
