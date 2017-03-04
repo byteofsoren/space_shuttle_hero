@@ -20,7 +20,7 @@ bool Graphics::tryUpdate() {
     if (userClosed()) return false;
 
     win.clear(backColor);
-    for (int i = 0; i < tiles.size(); i++)
+    for (size_t i = 0; i < tiles.size(); i++)
     {
         Tile_t *cTile = tiles[i];
         int tileWidth = cTile->width;

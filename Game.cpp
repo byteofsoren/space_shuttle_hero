@@ -25,10 +25,8 @@ int Game::init() {
 }
 
 int Game::run() {
-    this->renderer.update();
-    this->renderer.run();
+    this->renderer.startThreads();
     while (this->renderer.isOpen()) {}
-    this->renderer.stop();
     std::cout << "Hello World!" << std::endl;
 
     return 0;
