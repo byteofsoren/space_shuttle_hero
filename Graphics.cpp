@@ -1,9 +1,10 @@
-#include <iostream>
 #include "Graphics.hpp"
+#include <iostream>
 
 Graphics::Graphics(int w, int h, std::string title) {
     this->win.create(sf::VideoMode(w,h), title);
     this->win.clear(sf::Color::Black);
+    this->win.display();
     this->runnig = 0;
 }
 void Graphics::setBacground(sf::Color color) {
@@ -34,6 +35,9 @@ int Graphics::addTile(Tile_t &tile) {
     this->tileMutex.unlock();
     return this->tiles.size();
 }
+bool Graphics::isOpen() {
+    return win.isOpen();
+}
 void Graphics::removeTile(int tileNr) {
     this->tileMutex.lock();
     this->tiles.erase(this->tiles.begin() + tileNr);
@@ -47,6 +51,7 @@ void Graphics::update() {
         rect.setPosition(it->posX, it->posY);
         this->draw(rect);
     }
+    this->win.display();
     this->tileMutex.unlock();
 }
 
@@ -56,7 +61,14 @@ void Graphics::run() {
 }
 
 void Graphics::run_funk() {
-     while (this->runnig) {
+     while (this->isOpen()) {
+        sf::Event event;
+        while (win.pollEvent(event)) {
+            if (event.type==sf::Event::Closed) {
+                win.close();
+                this->runnig = 0;
+            }
+        }
         this->update();
     }
 }

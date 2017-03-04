@@ -14,7 +14,7 @@ OBJECTS_CPP=$(TARGET_CPP:=.o)
 EXECFILE=prog.out
 ## LFLAGS is the libary linker flags like -lncurses or -lpthread.
 LFLAGS_C=
-LFLAGS_CPP=-std=c++0x -lsfml-graphics -lsfml-window -lsfml-system
+LFLAGS_CPP=-std=c++0x -lsfml-graphics -lsfml-window -lsfml-system -pthread
 #LFLAGS=-lncurses -lm
 ## CFLAGS tells the copmiler to compile with diffrent flaggs mostly -g -Wall
 FLAGS_C=-g -Wall
