@@ -20,8 +20,8 @@ void Actor::update() {
 
     // Update tile position to current position
 
-    this->gfx.posX = this->xPos - this->gfx.width;
-    this->gfx.posY = this->yPos - this->gfx.height;
+    this->tile.posX = this->xPos - this->tile.width;
+    this->tile.posY = this->yPos - this->tile.height;
 }
 
 void Actor::act(Actor &a) {

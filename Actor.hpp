@@ -5,7 +5,7 @@
 
 class Actor {
     protected:
-        Tile_t gfx;
+        Tile_t tile;
         double xPos, yPos;                // Position
         double xVel, yVel;                // Velocity
         double cr;                        // Collision radius
@@ -18,7 +18,7 @@ class Actor {
         void setXVel(double value) { this->xVel = value; }
         void setYVel(double value) { this->yVel = value; }
 
-        Tile_t getGfx() { return this->gfx; }
+        const Tile_t& getTile() { return this->tile; }
 };
 
 #endif
