@@ -1,5 +1,5 @@
-#include <Graphics.hpp>
 #include <iostream>
+#include "Graphics.hpp"
 
 Graphics::Graphics(int w, int h, std::string title) {
     this->win.create(sf::VideoMode(w,h), title);
