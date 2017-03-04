@@ -18,13 +18,13 @@ class Graphics
 {
 public:
     Graphics (int w, int h, std::string title);
-    virtual ~Graphics ();
     void setBacground(sf::Color color);
     void setBacground(sf::Texture texture);
     void setBacground(std::string url);
     void draw(sf::RectangleShape rect);
     void draw(Tile_t tile);
     int addTile(Tile_t &tile);
+    bool isOpen();
     void removeTile(int tileNr);
     void update();
     void run();

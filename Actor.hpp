@@ -10,6 +10,8 @@ class Actor {
         int xVel, yVel;                // Velocity
         double cr;                     // Collision radius
     public:
+        Actor();
+        ~Actor();
         void move();
         void draw();
         virtual void act(Actor &a);
