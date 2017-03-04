@@ -17,6 +17,8 @@ class Actor {
 
         void setXVel(double value) { this->xVel = value; }
         void setYVel(double value) { this->yVel = value; }
+
+        Tile_t getGfx() { return this->gfx; }
 };
 
 #endif
