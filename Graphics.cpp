@@ -1,83 +1,77 @@
 #include "Graphics.hpp"
 #include <iostream>
+#include <unistd.h>
+
+/*
+Graphics renderer = (800, 800, "Space Shuttle Hero");
+renderer.addTile(this->obj1);
+renderer.update();
+renderer.run();
+while (this->renderer.isOpen()) {}
+renderer.stop();
+*/
 
 Graphics::Graphics(int w, int h, std::string title) {
-    this->win.create(sf::VideoMode(w,h), title);
-    this->win.clear(sf::Color::Black);
-    this->win.display();
-    this->runnig = 0;
+    win.create(sf::VideoMode(w,h), title);
+    win.clear(sf::Color::Black);
+    win.display();
 }
-void Graphics::setBackground(sf::Color color) {
-    this->color = color;
-}
-void Graphics::setBackground(sf::Texture texture) {
-    this->texture = texture;
-}
-void Graphics::setBackground(std::string url) {
-    sf::Texture texture;
-    if (!texture.loadFromFile(url)) {
-            std::cout<<"Error loading from file" <<std::endl;
-            exit(EXIT_FAILURE);
-    }
-    this->texture = texture;
-}
-void Graphics::draw(sf::RectangleShape rect) {
-    this->win.draw(rect);
-}
-void Graphics::draw(Tile_t tile) {
-    sf::RectangleShape rect(sf::Vector2f(tile.width, tile.height));
-    rect.setPosition(tile.posX, tile.posY);
-    this->draw(rect);
-}
-int Graphics::addTile(Tile_t &tile) {
-    this->tileMutex.lock();
-    this->tiles.push_back(tile);
-    this->tileMutex.unlock();
-    return this->tiles.size();
-}
-bool Graphics::isOpen() {
-    //std::cout << "isOpen" << std::endl;
-    //std::cout << win.isOpen() << std::endl;
-    return win.isOpen();
-}
-void Graphics::removeTile(int tileNr) {
-    this->tileMutex.lock();
-    this->tiles.erase(this->tiles.begin() + tileNr);
-    this->tileMutex.unlock();
-}
-void Graphics::update() {
-    //win.clear(this->color);    // Need a ifcase for bacground.
-    std::vector<Tile_t>::iterator it;
-    this->tileMutex.lock();
-    for(it = this->tiles.begin(); it != this->tiles.end(); it++){
-        sf::RectangleShape rect(sf::Vector2f(it->width, it->height));
-        rect.setPosition(it->posX, it->posY);
-        this->draw(rect);
-    }
-    this->win.display();
-    this->tileMutex.unlock();
-}
+bool Graphics::tryUpdate() {
+    if (userClosed()) return false;
 
-void Graphics::run() {
-    this->runnig = 1;
-    this->renThread = std::thread(&Graphics::run_funk, this);
+    win.clear(backColor);
+    for (int i = 0; i < tiles.size(); i++)
+    {
+        Tile_t *cTile = tiles[i];
+        int tileWidth = cTile->width;
+        int tileHeight = cTile->height;
+        int tilePosX = cTile->posX;
+        int tilePosY = cTile->posY;
+
+        sf::RectangleShape rect(sf::Vector2f(tileWidth, tileHeight));
+        rect.setPosition(tilePosX, tilePosY);
+        draw(rect);
+    }
+    win.display();
+    return true;
 }
 
 void Graphics::run_funk() {
-     while (this->isOpen()) {
-        std::cout << "run_funk" << std::endl;
-        sf::Event event;
-        while (win.pollEvent(event)) {
-            if (event.type==sf::Event::Closed) {
-                win.close();
-                std::cout << "Closed winodw" << std::endl;
-                this->runnig = 0;
-            }
-        }
-        this->update();
+    while (tryUpdate())
+    {
+        std::cout << "UPDATING" << std::endl;
     }
+    runThread.detach();
 }
-void Graphics::stop() {
-    this->runnig = 0;
-    this->renThread.join();
+
+void Graphics::addTile(Tile_t *tile) {
+    tiles.push_back(tile);
 }
+
+//DEBUG
+
+/*int main () {
+    Tile_t a = {250, 250, 10, 10, ""};
+    Tile_t b = {500, 500, 10, 10, ""};
+    std::cout << "Hello World";
+    Graphics renderer (800, 800, "Space Shuttle Hero");
+    //renderer.addTile(obj1);
+
+    //sf::RectangleShape rect(sf::Vector2f(50, 50));
+    //rect.setPosition(20, 20);
+    //renderer.draw(rect);
+
+    renderer.addTile(&a);
+    renderer.addTile(&b);
+
+    renderer.startThreads();
+
+
+    for (int i = 50; i < 1000; i++) {
+        a.posX += 1;
+        std::cout << a.posX << std::endl;
+        usleep(10000);
+    }
+    //while (renderer.isOpen()) {}
+}
+*/
