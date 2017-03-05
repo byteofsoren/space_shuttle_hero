@@ -2,14 +2,14 @@
 #define game_hpp
 
 #include "Graphics.hpp"
-//#include "actor.hpp"
+#include "Actor.hpp"
 
 class Game {
     private:
         Tile_t obj1, obj2;
         Graphics renderer;
-    /*        std::vector<Actor> actors;
-        Actor p1;
+        std::vector<Actor> actors;
+    /*  Actor p1;
         Actor p2;*/
     
     public:

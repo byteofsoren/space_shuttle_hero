@@ -18,9 +18,9 @@ class Actor {
         void setXVel(double value)     { this->xVel = value; }
         void setYVel(double value)     { this->yVel = value; }
         void setVel(double x, double y){ this->yVel = y; this->xVel = x; }
-        void setXPos(double value)     { this->xPos = value; }
-        void setYPos(double value)     { this->yPos = value; }
-        void setPos(double x, double y){ this->yPos = y; this->xPos = x; }
+        void setXPos(double value)     { xPos = value; tile.posX = value; }
+        void setYPos(double value)     { yPos = value; tile.posY = value; }
+        void setPos(double x, double y){ setXPos(x); setYPos(y); }
         void setCR(double value)       { this->cr = value; }
 
         double getXVel()  { return this->xVel; }

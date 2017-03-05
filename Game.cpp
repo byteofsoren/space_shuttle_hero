@@ -13,13 +13,9 @@ Game::~Game() {
 }
 
 int Game::init() {
-    std::vector<Actor*> actors;
-    Actor player1;
-    player1.setPos(10,100);
-    Actor player2;
-    player2.setPos(40,130);
-    renderer.addTile(player1.getTile());
-    renderer.addTile(player2.getTile());
+    actors.push_back({});
+    actors.back().setPos(100, 100);
+    renderer.addTile(actors.back().getTile());
 
     return 1;
 }
