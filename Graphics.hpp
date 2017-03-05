@@ -9,7 +9,7 @@ struct Tile_t{
     float posY;
     float width;
     float height;
-    std::string textureUrl;
+    std::string identifier;
 };
 
 
