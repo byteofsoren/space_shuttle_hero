@@ -29,5 +29,5 @@ int Game::run() {
     while (this->renderer.isOpen()) {}
     std::cout << "Hello World!" << std::endl;
 
-    return 0;
+    return 1;
 }
