@@ -2,15 +2,6 @@
 #include <iostream>
 #include <unistd.h>
 
-/*
-Graphics renderer = (800, 800, "Space Shuttle Hero");
-renderer.addTile(this->obj1);
-renderer.update();
-renderer.run();
-while (this->renderer.isOpen()) {}
-renderer.stop();
-*/
-
 Graphics::Graphics(int w, int h, std::string title) {
     win.create(sf::VideoMode(w,h), title);
     win.clear(sf::Color::Black);
@@ -34,14 +25,6 @@ bool Graphics::tryUpdate() {
     }
     win.display();
     return true;
-}
-
-void Graphics::run_funk() {
-    while (tryUpdate())
-    {
-	// What should be done between each graphical update?
-    }
-    runThread.detach();
 }
 
 void Graphics::addTile(Tile_t *tile) {

@@ -2,13 +2,12 @@
 #define GRAPHICS
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <thread>
 
 struct Tile_t{
-    float posX;
-    float posY;
-    float width;
-    float height;
+    int posX;
+    int posY;
+    int width;
+    int height;
     std::string identifier;
 };
 
@@ -23,7 +22,6 @@ public:
     void draw(sf::RectangleShape rect){win.draw(rect);}
     bool isOpen(){return win.isOpen();}
     bool tryUpdate(); //Redraw all tiles from
-    void startThreads(){runThread = std::thread(&Graphics::run_funk, this);}
     void removeTile(int tileNr);
     void addTile(Tile_t *tile);
 
@@ -34,10 +32,6 @@ private:
     sf::Color backColor;
     sf::Texture backTexture;
     std::vector<Tile_t *> tiles;
-    std::thread runThread;
-    void run_funk();
-    void stop_funk();
-    pthread_t thread;
     bool userClosed() {
         sf::Event event;
         if (win.pollEvent(event)) {

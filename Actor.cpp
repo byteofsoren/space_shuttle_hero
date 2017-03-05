@@ -1,32 +1,31 @@
 #include "Actor.hpp"
+#include <time.h>
 
 Actor::Actor() {
-    this->xPos = 0.0;
-    this->yPos = 0.0;
-    this->xVel = 0.0;
-    this->yVel = 0.0;
-    this->cr = 0.0;
-    this->tile.posX = 0.0;
-    this->tile.posY = 0.0;
-    this->tile.width = 100.0;
-    this->tile.height = 150.0;
-    this->tile.identifier = "GenericActor";
+    xPos = 0.0;
+    yPos = 0.0;
+    xVel = 0.0;
+    yVel = 0.0;
+    cr = 0.0;
+    tile.posX = 0.0;
+    tile.posY = 0.0;
+    tile.width = 100.0;
+    tile.height = 150.0;
+    tile.identifier = "GenericActor";
+    lastUpdate = clock();
 }
 
 Actor::~Actor() {
-    
 }
 
 void Actor::update() {
+    clock_t currentClock = clock();
+    double velocityMultiplicant = (currentClock - lastUpdate) / 1000;
     // Update actor position based on velocities
+    setXPos(xPos + xVel * velocityMultiplicant);
+    setYPos(yPos + yVel * velocityMultiplicant);
 
-    this->xPos += this->xVel;
-    this->yPos += this->yVel;
-
-    // Update tile position to current position
-
-    this->tile.posX = this->xPos - this->tile.width;
-    this->tile.posY = this->yPos - this->tile.height;
+    lastUpdate = currentClock;
 }
 
 void Actor::act(Actor &a) {
