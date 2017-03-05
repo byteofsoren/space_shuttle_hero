@@ -39,7 +39,7 @@ bool Graphics::tryUpdate() {
 void Graphics::run_funk() {
     while (tryUpdate())
     {
-        std::cout << "UPDATING" << std::endl;
+	// What should be done between each graphical update?
     }
     runThread.detach();
 }
