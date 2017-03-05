@@ -2,7 +2,7 @@
 #define ACTOR_H
 
 #include "Graphics.hpp"
-#include <time.h>
+#include <chrono>
 
 class Actor {
     protected:
@@ -10,7 +10,7 @@ class Actor {
         double xPos, yPos;                // Position
         double xVel, yVel;                // Velocity
         double cr;                        // Collision radius
-	clock_t lastUpdate;               // mSec since last update()
+	std::chrono::time_point<std::chrono::system_clock> lastUpdate;               // mSec since last update()
     public:
         Actor();
         ~Actor();

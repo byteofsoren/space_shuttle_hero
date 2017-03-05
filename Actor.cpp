@@ -1,5 +1,5 @@
 #include "Actor.hpp"
-#include <time.h>
+#include <chrono>
 
 Actor::Actor() {
     xPos = 0.0;
@@ -12,18 +12,19 @@ Actor::Actor() {
     tile.width = 100.0;
     tile.height = 150.0;
     tile.identifier = "GenericActor";
-    lastUpdate = clock();
+    lastUpdate = std::chrono::system_clock::now();
 }
 
 Actor::~Actor() {
 }
 
 void Actor::update() {
-    clock_t currentClock = clock();
-    double velocityMultiplicant = (currentClock - lastUpdate) / 1000;
+    std::chrono::time_point<std::chrono::system_clock> currentClock = std::chrono::system_clock::now();
+
+    std::chrono::duration<double> difference = currentClock - lastUpdate;
     // Update actor position based on velocities
-    setXPos(xPos + xVel * velocityMultiplicant);
-    setYPos(yPos + yVel * velocityMultiplicant);
+    setXPos(xPos + xVel * difference.count());
+    setYPos(yPos + yVel * difference.count());
 
     lastUpdate = currentClock;
 }

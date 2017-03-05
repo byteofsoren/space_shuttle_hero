@@ -17,7 +17,7 @@ Game::~Game() {
 int Game::init() {
     actors.push_back({});
     actors.back().setPos(100, 100);
-    actors.back().setXVel(1);
+    actors.back().setXVel(100);
     renderer.addTile(actors.back().getTile());
 
     return 1;
