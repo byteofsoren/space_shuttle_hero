@@ -14,14 +14,13 @@ bool Graphics::tryUpdate() {
     for (size_t i = 0; i < tiles.size(); i++)
     {
         Tile_t *cTile = tiles[i];
-        int tileWidth = cTile->width;
-        int tileHeight = cTile->height;
         int tilePosX = cTile->posX;
         int tilePosY = cTile->posY;
 
-        sf::RectangleShape rect(sf::Vector2f(tileWidth, tileHeight));
-        rect.setPosition(tilePosX, tilePosY);
-        draw(rect);
+	sf::Sprite sprite;
+	sprite.setTexture(getTexture(cTile->source));
+	sprite.setPosition(tilePosX,tilePosY);
+        win.draw(sprite);
     }
     win.display();
     return true;
@@ -29,6 +28,17 @@ bool Graphics::tryUpdate() {
 
 void Graphics::addTile(Tile_t *tile) {
     tiles.push_back(tile);
+}
+
+sf::Texture& Graphics::getTexture(std::string url)
+{
+    if (textureStore.count(url) == 0) {std::cout << "Test" << std::endl;
+	sf::Texture newTexture;
+	newTexture.loadFromFile(url);
+        textureStore.insert(std::pair<std::string, sf::Texture>(url,newTexture));
+    }
+
+    return textureStore[url];
 }
 
 //DEBUG

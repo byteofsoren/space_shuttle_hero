@@ -39,14 +39,14 @@ void Player::update()
 	else if (input.down())
 		Actor::yVel = speed;
 	else
-		Actor::yVel = 0;
+		Actor::yVel *= 0.99;
 
 	if (input.left())
 		Actor::xVel = -speed;
 	else if (input.right())
 		Actor::xVel = speed;
 	else
-		Actor::xVel = 0;
+		Actor::xVel *= 0.99;
 
 	Actor::update();
 }

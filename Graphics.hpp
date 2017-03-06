@@ -6,9 +6,7 @@
 struct Tile_t{
     int posX;
     int posY;
-    int width;
-    int height;
-    std::string identifier;
+    std::string source;
 };
 
 
@@ -28,6 +26,8 @@ public:
 
 private:
     /* data */
+    std::map<std::string, sf::Texture> textureStore;
+    sf::Texture& getTexture(std::string url);
     sf::RenderWindow win;
     sf::Color backColor;
     sf::Texture backTexture;
