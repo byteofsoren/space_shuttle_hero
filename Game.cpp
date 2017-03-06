@@ -8,7 +8,6 @@
 
 Game::Game() : renderer(800, 800, "Space Shuttle Hero") {
     // Reset everything here
-
 }
 
 Game::~Game() {
@@ -16,9 +15,12 @@ Game::~Game() {
 }
 
 int Game::init() {
-    actors.push_back(new Player{1});
+    actors.push_back(new Player{1,1});
     actors.back()->setPos(100, 100);
-    actors.back()->setXVel(100);
+    renderer.addTile(actors.back()->getTile());
+
+    actors.push_back(new Player{0,1});
+    actors.back()->setPos(300, 100);
     renderer.addTile(actors.back()->getTile());
 
     return 1;
@@ -27,7 +29,10 @@ int Game::init() {
 int Game::run() {
     while (renderer.tryUpdate())
     {
-        actors.back()->update();
+        for (unsigned i = 0; i < this->actors.size(); i++) {
+            this->actors[i]->update();
+        }
     }
+    
     return 1;
 }

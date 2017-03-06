@@ -32,4 +32,3 @@ void Actor::update() {
 void Actor::act(Actor &a) {
     return;
 }
-

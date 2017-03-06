@@ -5,7 +5,7 @@
 
 class Input
 {
-private:
+private:    
     sf::Keyboard::Key upKey;
     sf::Keyboard::Key rightKey;
     sf::Keyboard::Key downKey;
@@ -14,12 +14,19 @@ private:
     bool isKeyPressed(sf::Keyboard::Key key);
 
 public:
-    Input(sf::Keyboard::Key up,sf::Keyboard::Key right, sf::Keyboard::Key down, sf::Keyboard::Key left, sf::Keyboard::Key shoot ):upKey(up),rightKey(right),downKey(down),leftKey(left),shootKey(shoot){}
+    enum Buttons {Up, Right, Down, Left, Shoot};
+
+    Input();
+    Input(sf::Keyboard::Key up, sf::Keyboard::Key right,
+          sf::Keyboard::Key down, sf::Keyboard::Key left,
+          sf::Keyboard::Key shoot);
     bool up();
     bool right();
     bool down();
     bool left();
     bool shoot();
+
+    void mapKey(sf::Keyboard::Key k, Buttons b);
 };
 
 #endif /* INPUT_H */
