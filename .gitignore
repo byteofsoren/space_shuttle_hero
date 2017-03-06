@@ -30,3 +30,6 @@
 
 # Backup files
 *~
+
+# Ctags ignore for vim.
+tags
