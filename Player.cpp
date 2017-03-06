@@ -1,21 +1,24 @@
 // player.cpp
-#include <iostream>
 #include "Player.hpp"
 
-// Public
-	Player::Player() {
-		this->life = 0;
-	}
-	
-	Player::Player(int life) {
-		this->life = life;
-	}
-	
-	Player::~Player() {}
-	
-	void Player::act(Actor &a) {
-		return;
-	}
-		
-// Private
-	int life;
+Player::~Player() {return;}
+
+void Player::update()
+{
+	const int speed = 100;
+	if (input.up())
+		Actor::yVel = -speed;
+	else if (input.down())
+		Actor::yVel = speed;
+	else
+		Actor::yVel = 0;
+
+	if (input.left())
+		Actor::xVel = -speed;
+	else if (input.right())
+		Actor::xVel = speed;
+	else
+		Actor::xVel = 0;
+
+	Actor::update();
+}

@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "Graphics.hpp"
 #include "Actor.hpp"
+#include "Player.hpp"
 
 #include <unistd.h>
 
@@ -15,10 +16,10 @@ Game::~Game() {
 }
 
 int Game::init() {
-    actors.push_back({});
-    actors.back().setPos(100, 100);
-    actors.back().setXVel(100);
-    renderer.addTile(actors.back().getTile());
+    actors.push_back(new Player{1});
+    actors.back()->setPos(100, 100);
+    actors.back()->setXVel(100);
+    renderer.addTile(actors.back()->getTile());
 
     return 1;
 }
@@ -26,7 +27,7 @@ int Game::init() {
 int Game::run() {
     while (renderer.tryUpdate())
     {
-        actors.back().update();
+        actors.back()->update();
     }
     return 1;
 }

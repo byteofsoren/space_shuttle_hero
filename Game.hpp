@@ -8,7 +8,7 @@ class Game {
     private:
         Tile_t obj1, obj2;
         Graphics renderer;
-        std::vector<Actor> actors;
+        std::vector<Actor *> actors;
     /*  Actor p1;
         Actor p2;*/
     

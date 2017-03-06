@@ -14,7 +14,7 @@ class Actor {
     public:
         Actor();
         ~Actor();
-        void update();
+        virtual void update();
         virtual void act(Actor &a);
 
         void setXVel(double value)     { this->xVel = value; }
