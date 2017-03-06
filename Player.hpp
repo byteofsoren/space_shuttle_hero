@@ -12,7 +12,9 @@ class Player : public Actor {
 	    ~Player();
         void act(Actor &a);
 	    void update();
-	
+
+        int getLife() { return this->life; }
+    
 	private:
 	int life;
 	Input input;

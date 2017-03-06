@@ -4,14 +4,15 @@
 #include "Graphics.hpp"
 #include "Actor.hpp"
 
+class Player;
+
 class Game {
     private:
-        Tile_t obj1, obj2;
         Graphics renderer;
+        Tile_t p1Life, p2Life;
         std::vector<Actor *> actors;
-    /*  Actor p1;
-        Actor p2;*/
-    
+        Player *p1, *p2;
+
     public:
         Game();
         ~Game();
