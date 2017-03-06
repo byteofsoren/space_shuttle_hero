@@ -11,22 +11,14 @@ class Actor {
         double xPos, yPos;                // Position
         double xVel, yVel;                // Velocity
         double collisionRadius;            // Collision radius
-	std::chrono::time_point<std::chrono::system_clock> lastUpdate;               // mSec since last update()
+        std::chrono::time_point<std::chrono::system_clock> lastUpdate;               // mSec since last update()
     public:
         Actor();
         ~Actor();
         virtual void update();
         virtual void act(Actor &a);
 
-	bool collidesWith(Actor* other) {
-		double dX = getXPos() - other->getXPos();
-		double dY = getYPos() - other->getYPos();
-		double distance = sqrt(dX*dX + dY*dY);
-		if (distance < getCR() + other->getCR())
-			return true;
-		return false;
-		
-	}
+        bool collidesWith(Actor* other);
 
         void setXVel(double value)     { xVel = value; }
         void setYVel(double value)     { yVel = value; }

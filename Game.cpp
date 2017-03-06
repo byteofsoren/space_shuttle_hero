@@ -14,7 +14,7 @@ Game::Game() : renderer(800, 800, "Space Shuttle Hero") {
 }
 
 Game::~Game() {
-
+    delete form;
 }
 
 int Game::init() {
@@ -42,6 +42,15 @@ int Game::init() {
 
     renderer.addTile(&this->p1Life);
     renderer.addTile(&this->p2Life);
+
+    form = new Formation(5,0);
+
+    for (auto &enemy : form->getEnemies()) {
+        this->actors.push_back(enemy);
+        renderer.addTile(enemy->getTile());
+    }
+    
+    form->spawn(1);
     
     return 1;
 }
@@ -51,12 +60,13 @@ int Game::run() {
     {
         // Check collisions and run act() on relevant actors
 
+        this->form->update();
+
         for (unsigned i = 0; i < this->actors.size(); i++) {
             for (unsigned j = 0; j < this->actors.size(); j++) {
-		if (i != j) {
-			if (actors[i]->collidesWith(actors[j]))
-				std::cout << "Crash!" << std::endl;
-		}
+                if (i != j && actors[i]->collidesWith(actors[j])) {
+                    std::cout << "Crash!" << std::endl;
+                }
             }
         }
 

@@ -3,6 +3,7 @@
 
 #include "Graphics.hpp"
 #include "Actor.hpp"
+#include "Formation.hpp"
 
 class Player;
 
@@ -12,7 +13,8 @@ class Game {
         Tile_t p1Life, p2Life;
         std::vector<Actor *> actors;
         Player *p1, *p2;
-
+        Formation *form;
+    
     public:
         Game();
         ~Game();

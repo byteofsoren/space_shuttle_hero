@@ -21,6 +21,20 @@ void Actor::setTexture(std::string textureSource)
 Actor::~Actor() {
 }
 
+bool Actor::collidesWith(Actor* other)
+{
+    double dX = getXPos() - other->getXPos();
+    double dY = getYPos() - other->getYPos();
+    double distance = sqrt(dX*dX + dY*dY);
+
+    if (distance < getCR() + other->getCR()) {
+        return true;
+    }
+
+    return false;
+}
+
+
 void Actor::update() {
     std::chrono::time_point<std::chrono::system_clock> currentClock = std::chrono::system_clock::now();
 
