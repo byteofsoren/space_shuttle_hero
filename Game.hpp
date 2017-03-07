@@ -12,6 +12,7 @@ class Game {
         Graphics renderer;
         Tile_t p1Life, p2Life;
         std::vector<Actor *> actors;
+        std::vector<Player *> players;
         Player *p1, *p2;
         Formation *form;
     
