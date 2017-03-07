@@ -30,6 +30,15 @@ void Graphics::addTile(Tile_t *tile) {
     tiles.push_back(tile);
 }
 
+void Graphics::removeTile(Tile_t *tile) {
+    for (size_t x = 0; x < tiles.size(); x++)
+        if (tiles[x] == tile)
+        {
+            tiles.erase(tiles.begin()+x);
+            return;
+        }
+}
+
 sf::Texture& Graphics::getTexture(std::string url)
 {
     if (textureStore.count(url) == 0) {std::cout << "Test" << std::endl;

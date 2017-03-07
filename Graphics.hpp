@@ -20,7 +20,7 @@ public:
     void draw(sf::RectangleShape rect){win.draw(rect);}
     bool isOpen(){return win.isOpen();}
     bool tryUpdate(); //Redraw all tiles from
-    void removeTile(int tileNr);
+    void removeTile(Tile_t *tile);
     void addTile(Tile_t *tile);
 
 

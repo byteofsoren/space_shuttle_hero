@@ -18,14 +18,14 @@ Game::~Game() {
 }
 
 int Game::init() {
-    actors.push_back(new Player{0,5});
-    p1 = (Player*)actors.back();
+    players.push_back(new Player{0,5});
+    p1 = (Player*)players.back();
     p1->setCR(25);
     p1->setTexture("uglySpaceship.png");
     renderer.addTile(p1->getTile());
 
-    actors.push_back(new Player{1,3});
-    p2 = (Player*)actors.back();
+    players.push_back(new Player{1,3});
+    p2 = (Player*)players.back();
     p2->setCR(25);
     renderer.addTile(p2->getTile());
 
@@ -49,13 +49,11 @@ int Game::init() {
         this->actors.push_back(enemy);
         renderer.addTile(enemy->getTile());
     }
-    
     form->spawn(1);
-    
     return 1;
 }
 
-int Game::run() {    
+int Game::run() {
     while (renderer.tryUpdate())
     {
         // Check collisions and run act() on relevant actors
@@ -63,17 +61,35 @@ int Game::run() {
         this->form->update();
 
         for (unsigned i = 0; i < this->actors.size(); i++) {
-            for (unsigned j = 0; j < this->actors.size(); j++) {
-                if (i != j && actors[i]->collidesWith(actors[j])) {
-                    std::cout << "Crash!" << std::endl;
+            if (!actors[i]->isAlive()) {
+                //Ta bort actor från vektor och avregistrera.
+            }
+            else {
+                for (unsigned j = 0; j < this->actors.size(); j++) {
+                    if (i != j && actors[i]->collidesWith(actors[j])) {
+                        std::cout << "Crash!" << std::endl;
+                    }
+                }
+                for (size_t j = 0; j < this->players.size(); j++) {
+                    if (players[j]->collidesWith(actors[i])) {
+                        //
+                    }
                 }
             }
         }
+
 
         // Update actors
 
         for (unsigned i = 0; i < this->actors.size(); i++) {
             this->actors[i]->update();
+        }
+
+        for (unsigned i = 0; i < this->players.size(); i++) {
+            this->players[i]->update();
+            if (players[i]->isShooting()) {
+                // Generate misile.
+            }
         }
 
         // Update GUI

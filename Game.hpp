@@ -15,7 +15,6 @@ class Game {
         std::vector<Player *> players;
         Player *p1, *p2;
         Formation *form;
-    
     public:
         Game();
         ~Game();

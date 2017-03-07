@@ -12,6 +12,7 @@ class Actor {
         double xVel, yVel;                // Velocity
         double collisionRadius;            // Collision radius
         std::chrono::time_point<std::chrono::system_clock> lastUpdate;               // mSec since last update()
+        int life;
     public:
         Actor();
         ~Actor();
@@ -19,7 +20,9 @@ class Actor {
         virtual void act(Actor &a);
 
         bool collidesWith(Actor* other);
+        bool isAlive() {if (life>0)return true;else return false;}
 
+        int getLife() { return this->life; }
         void setXVel(double value)     { xVel = value; }
         void setYVel(double value)     { yVel = value; }
         void setVel(double x, double y){ yVel = y; this->xVel = x; }
