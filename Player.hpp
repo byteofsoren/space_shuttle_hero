@@ -14,7 +14,7 @@ class Player : public Actor {
 	    void update();
         bool isShooting();
 	private:
-	Input input;
+	    Input input;
 };
 
 #endif

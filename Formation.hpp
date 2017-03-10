@@ -6,6 +6,13 @@
 
 class Actor;
 
+struct BPoint {    // A bezier point, complete with coefficients
+    float x;
+    float y;
+    int coefficient;
+    BPoint(float xPos, float yPos, int coef) : x(xPos), y(yPos), coefficient(coef) { }
+};
+
 class Formation {
     public:
         Formation();
@@ -20,6 +27,8 @@ class Formation {
         sf::Clock clock;
         sf::Time end;
         std::vector<Actor*> enemies;
+        std::vector<BPoint> points;
+        std::vector<int> coefficients;
         bool active;
         int type;
 };

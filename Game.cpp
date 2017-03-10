@@ -49,7 +49,7 @@ int Game::init() {
         this->actors.push_back(enemy);
         renderer.addTile(enemy->getTile());
     }
-    form->spawn(1);
+    form->spawn(2);
     return 1;
 }
 
@@ -67,7 +67,7 @@ int Game::run() {
             else {
                 for (unsigned j = 0; j < this->actors.size(); j++) {
                     if (i != j && actors[i]->collidesWith(actors[j])) {
-                        std::cout << "Crash!" << std::endl;
+                        //std::cout << "Crash!" << std::endl;
                     }
                 }
                 for (size_t j = 0; j < this->players.size(); j++) {
@@ -77,7 +77,6 @@ int Game::run() {
                 }
             }
         }
-
 
         // Update actors
 

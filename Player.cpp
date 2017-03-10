@@ -50,3 +50,7 @@ void Player::update()
 
 	Actor::update();
 }
+
+bool Player::isShooting() {
+    return false;
+}
