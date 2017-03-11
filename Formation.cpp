@@ -22,7 +22,8 @@ Formation::~Formation() { }
 void Formation::spawn(int type=0) {
     this->type = type;
     this->active = true;
-
+    this->points.clear();
+    
     // Set up the formation bezier vertices based on the type
 
     // This is based on Pascal's triangle, e.g.
