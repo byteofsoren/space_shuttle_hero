@@ -1,6 +1,6 @@
 #include <cmath>
 #include "Formation.hpp"
-#include "Actor.hpp"
+#include "Enemy.hpp"
 
 Formation::Formation() {
     this->end = sf::seconds(1);
@@ -8,7 +8,12 @@ Formation::Formation() {
 
 Formation::Formation(int size, int enemyType) : Formation() {
     for (int i=0; i < size; i++) {
-        this->enemies.push_back(new Actor());
+        switch (enemyType) {
+            
+            //case 0: this->enemies.push_back(new WeakEnemy()); break;
+            //case 1: this->enemies.push_back(new StrongEnemy()); break;
+            default: this->enemies.push_back(new Enemy()); break;
+        }
     }
 }
 
