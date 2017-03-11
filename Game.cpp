@@ -31,16 +31,16 @@ int Game::init() {
     this->p1->setPos(300, 200);
     this->p2->setPos(300, 100);
 
-    /*this->p1Life.posY = 30;
-    this->p1Life.posX = 30;
-    this->p1Life.source = "health.png";
+    // === The huds for the player is initialized here ===
+    int hudxpos = 500;
+    this->hud1 = new Hud(20,hudxpos);
+    this->hud2 = new Hud(300, hudxpos);
+    this->hud1->conectActor(*p1);
+    this->hud2->conectActor(*p2);
+    renderer.addTile(this->hud1->getTile());
+    renderer.addTile(this->hud2->getTile());
+    // === End intit ==
 
-    this->p2Life.posX = 600;
-    this->p2Life.posY = 300;
-    this->p2Life.source = "health.png"; 
-
-    renderer.addTile(&this->p1Life);
-    renderer.addTile(&this->p2Life);*/
 
     /* Initialise formations */
     
@@ -124,13 +124,10 @@ int Game::run() {
             }
         }
 
-        // Update GUI
+        // Update HUD
 
-        /*this->p1Life.width = 20*this->p1->getLife();
-        this->p2Life.width = 20*this->p2->getLife();
-        this->p2Life.posX = 770 - this->p2Life.width;*/
-
-        // Be nice to the rest of the programs on the computer, as well as the CPU
+        this->hud1->update();
+        this->hud2->update();
 
         // Check victory conditions and finish
         if (this->goal < this->gameClock.getElapsedTime()) {
@@ -141,6 +138,8 @@ int Game::run() {
             game_over = true;
         }
         
+        // Be nice to the rest of the programs on the computer, as well as the CPU
+
         sf::sleep(sf::milliseconds(10));
     }
     
