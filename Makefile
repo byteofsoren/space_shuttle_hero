@@ -31,7 +31,7 @@ $(TARGET_C):
 $(TARGET_CPP):
 	$(CC) $(FLAGS_CPP) $(LFLAGS_CPP) -c $@.cpp
 
-all: clean $(TARGET_CPP) $(TARGET_C)
+all: $(TARGET_CPP) $(TARGET_C)
 	$(CC) $(OBJECTS_CPP) $(OBJECTS_C) $(LFLAGS_CPP) $(FLAGS_CPP) -o $(EXECFILE)
 
 run: clean all
