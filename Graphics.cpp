@@ -2,10 +2,15 @@
 #include <iostream>
 #include <unistd.h>
 
+#define debug
+
 Graphics::Graphics(int w, int h, std::string title) {
     win.create(sf::VideoMode(w,h), title);
     win.clear(sf::Color::Black);
     win.display();
+    if (!font.loadFromFile("/usr/share/fonts/TTF/Vera.ttf")) {
+        std::cout << "Error cant font.loadFromFile" << std::endl;
+    }
 }
 bool Graphics::tryUpdate() {
     if (userClosed()) return false;
@@ -35,6 +40,18 @@ bool Graphics::tryUpdate() {
             if(cTile->source.size() != 0)sprite.setTexture(texture);
         }
         win.draw(sprite);
+        // Draw the text of the tile.
+        sf::Text text;
+        if (cTile->text.size()) {
+#ifdef debug
+            std::cout << "Create text" << std::endl;
+#endif
+            text.setFont(this->font);
+            text.setString(cTile->text);
+            text.setFillColor(sf::Color::White);
+            text.setCharacterSize(12);
+            win.draw(text);
+        }
     }
     win.display();
     return true;

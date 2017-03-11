@@ -39,6 +39,9 @@ int Game::init() {
     this->hud2->conectActor(*p2);
     renderer.addTile(this->hud1->getTile());
     renderer.addTile(this->hud2->getTile());
+    renderer.addTile(this->hud1->getTextTile());
+    renderer.addTile(this->hud2->getTextTile());
+
     // === End intit ==
 
 

@@ -9,6 +9,7 @@ struct Tile_t{
     int width;
     int height;
     std::string source;
+    std::string text;
 };
 
 
@@ -33,6 +34,7 @@ private:
     sf::RenderWindow win;
     sf::Color backColor;
     sf::Texture backTexture;
+    sf::Font font;
     std::vector<Tile_t *> tiles;
     bool userClosed() {
         sf::Event event;
