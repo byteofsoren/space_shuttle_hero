@@ -41,9 +41,12 @@ void Graphics::removeTile(Tile_t *tile) {
 
 sf::Texture& Graphics::getTexture(std::string url)
 {
-    if (textureStore.count(url) == 0) {std::cout << "Test" << std::endl;
-	sf::Texture newTexture;
-	newTexture.loadFromFile(url);
+    std::string gfx_folder = "gfx/";
+    
+    if (textureStore.count(url) == 0) {
+        std::cout << "Test" << std::endl;
+        sf::Texture newTexture;
+        newTexture.loadFromFile(gfx_folder+url);
         textureStore.insert(std::pair<std::string, sf::Texture>(url,newTexture));
     }
 
