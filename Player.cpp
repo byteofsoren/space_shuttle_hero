@@ -34,16 +34,22 @@ void Player::act(Actor &a) {}
 void Player::update()
 {
 	const int speed = 100;
-	if (input.up() && Actor::tile.posY > 90 )
+
+    if (this->xPos < 0) this->xPos = 0;
+    if (this->xPos > 800) this->xPos =800;
+    if (this->yPos < 0) this->yPos = 0;
+    if (this->yPos > 800) this->yPos = 800;
+
+	if (input.up() )
 		Actor::yVel = -speed;
-	else if (input.down() && Actor::tile.posY < 600)
+	else if (input.down())
 		Actor::yVel = speed;
 	else
 		Actor::yVel *= 0.99;
 
-	if (input.left() && Actor::tile.posX > 90)
+	if (input.left())
 		Actor::xVel = -speed;
-	else if (input.right() && Actor::tile.posX < 800)
+	else if (input.right())
 		Actor::xVel = speed;
 	else
 		Actor::xVel *= 0.99;
