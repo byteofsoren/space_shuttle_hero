@@ -11,7 +11,6 @@ TARGET_CPP=Graphics Input Game Formation Actor Player main
 OBJECTS_C=$(TARGET_C:=.o)
 OBJECTS_CPP=$(TARGET_CPP:=.o)
 ## EXECFILE is the name on the exe file you want
-EXECFILE=prog.out
 ## LFLAGS is the libary linker flags like -lncurses or -lpthread.
 LFLAGS_C=
 LFLAGS_CPP=-std=c++0x -lsfml-system -lsfml-graphics -lsfml-window -pthread
@@ -25,13 +24,24 @@ FLAGS_CPP=-g -Wall
 ## Also remember to create ctags in your src dir
 ##  $ ctags -R
 
+ifeq ($(OS),Windows_NT)
+OS_detected := Windows
+EXECFILE := game.exe
+REMOVE=del
+else
+OS_detected := $(shell uname -s)
+EXECFILE=game.out
+REMOVE=rm -f
+endif
+
+
 $(TARGET_C):
 	$(CC) $(FLAGS_C) $(LFLAGS_C) -c $@.c
 
 $(TARGET_CPP):
 	$(CC) $(FLAGS_CPP) $(LFLAGS_CPP) -c $@.cpp
 
-all: $(TARGET_CPP) $(TARGET_C)
+all: clean $(TARGET_CPP) $(TARGET_C)
 	$(CC) $(OBJECTS_CPP) $(OBJECTS_C) $(LFLAGS_CPP) $(FLAGS_CPP) -o $(EXECFILE)
 
 run: clean all
@@ -49,4 +59,4 @@ valgrind: clean all
 	valgrind ./$(EXECFILE)
 
 clean:
-	rm -f *.o $(EXECFILE) *.gch
+		$(REMOVE) *.o $(EXECFILE) *.gch
