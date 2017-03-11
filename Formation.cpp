@@ -47,11 +47,11 @@ void Formation::spawn(int type=0) {
             this->end = sf::seconds(1);
             break;
         case 2:
-            this->points.push_back(BPoint(800.0f,400.0f,1));
+            this->points.push_back(BPoint(900.0f,400.0f,1));
             this->points.push_back(BPoint(-500.0f,800.0f,3));
             this->points.push_back(BPoint(1300.0f,800.0f,3));
-            this->points.push_back(BPoint(0.0f,400.0f,1));
-            this->end = sf::seconds(2);
+            this->points.push_back(BPoint(-100.0f,400.0f,1));
+            this->end = sf::seconds(3);
             break;
         default:
             break;

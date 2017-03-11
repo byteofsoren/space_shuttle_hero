@@ -49,7 +49,7 @@ int Game::init() {
         this->actors.push_back(enemy);
         renderer.addTile(enemy->getTile());
     }
-    form->spawn(2);
+    form->spawn(0);
     return 1;
 }
 

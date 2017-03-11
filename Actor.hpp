@@ -13,6 +13,7 @@ class Actor {
         double collisionRadius;            // Collision radius
         std::chrono::time_point<std::chrono::system_clock> lastUpdate;               // mSec since last update()
         int life;
+
     public:
         Actor();
         ~Actor();
@@ -20,7 +21,7 @@ class Actor {
         virtual void act(Actor &a);
 
         bool collidesWith(Actor* other);
-        bool isAlive() {if (life>0)return true;else return false;}
+        bool isAlive() { return (life>0); }
 
         int getLife() { return this->life; }
         void setXVel(double value)     { xVel = value; }
@@ -37,7 +38,7 @@ class Actor {
         double getYPos()  { return yPos; }
         double getCR()    { return collisionRadius; }
         Tile_t *getTile() { return &tile; }
-	void setTexture(std::string textureSource);
+        void setTexture(std::string textureSource);
 };
 
 #endif
