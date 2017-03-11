@@ -5,6 +5,7 @@
 #include "Actor.hpp"
 #include "Formation.hpp"
 #include <queue>
+#include "Hud.hpp"
 
 class Player;
 
@@ -26,6 +27,7 @@ class Game {
         Player *p1, *p2;
         sf::Clock gameClock;
         sf::Time goal;
+        Hud *hud1, *hud2;
     public:
         Game();
         ~Game();
