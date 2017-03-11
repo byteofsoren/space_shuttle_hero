@@ -4,6 +4,7 @@
 #include "Graphics.hpp"
 #include "Actor.hpp"
 #include "Formation.hpp"
+#include "Hud.hpp"
 
 class Player;
 
@@ -14,6 +15,7 @@ class Game {
         std::vector<Actor *> actors;
         std::vector<Player *> players;
         Player *p1, *p2;
+        Hud *hud1, *hud2;
         Formation *form;
     public:
         Game();

@@ -28,7 +28,7 @@ bool Graphics::tryUpdate() {
             spRect.width = cTile->width;
             spRect.height = cTile->height;
             sprite.setTextureRect(spRect);
-            sprite.getTexture()->isRepeated();
+            //sprite.getTexture()->isRepeated();
         }
         win.draw(sprite);
     }

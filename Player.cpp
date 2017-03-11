@@ -7,6 +7,7 @@ Player::Player() {
     this->input.mapKey(sf::Keyboard::Down, Input::Down);
     this->input.mapKey(sf::Keyboard::Left, Input::Left);
     this->input.mapKey(sf::Keyboard::RControl, Input::Shoot);
+    this->life = 4;
 }
 
 Player::Player(int pNum, int life) {
@@ -17,7 +18,7 @@ Player::Player(int pNum, int life) {
         this->input.mapKey(sf::Keyboard::D, Input::Right);
         this->input.mapKey(sf::Keyboard::S, Input::Down);
         this->input.mapKey(sf::Keyboard::A, Input::Left);
-        this->input.mapKey(sf::Keyboard::Space, Input::Shoot);        
+        this->input.mapKey(sf::Keyboard::Space, Input::Shoot);
     } else {
         this->input.mapKey(sf::Keyboard::Up, Input::Up);
         this->input.mapKey(sf::Keyboard::Right, Input::Right);

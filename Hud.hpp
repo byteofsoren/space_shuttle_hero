@@ -1,15 +1,25 @@
 #ifndef HUD_H
 #define HUD_H
+#include "Graphics.hpp"
+#include "Player.hpp"
+#include "Actor.hpp"
+#include <iostream>
+#include <vector>
 
 class Hud
 {
 private:
-    
+    Tile_t hudTile;
+    Actor *act;
+    int oneTileWidth;
 
 public:
-    Hud();
+    Hud(int posX, int posY);
+    void setTileSize(int with, int height);
     //virtual ~Hud();
-    
+    Tile_t *getTile();
+    void conectActor(Actor &act) {this->act = &act;}
+    void update();
 };
 
 #endif /* HUD_H */

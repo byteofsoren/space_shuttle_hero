@@ -28,6 +28,15 @@ int Game::init() {
     p2 = (Player*)players.back();
     p2->setCR(25);
     renderer.addTile(p2->getTile());
+    // === The huds for the player is initialized here ===
+    int hudxpos = 500;
+    this->hud1 = new Hud(20,hudxpos);
+    this->hud2 = new Hud(300, hudxpos);
+    this->hud1->conectActor(*p1);
+    this->hud2->conectActor(*p2);
+    renderer.addTile(this->hud1->getTile());
+    renderer.addTile(this->hud2->getTile());
+    // === End intit ==
 
     this->p1->setPos(300, 200);
     this->p2->setPos(300, 100);
@@ -42,7 +51,7 @@ int Game::init() {
 
     renderer.addTile(&this->p1Life);
     renderer.addTile(&this->p2Life);
-
+    
     form = new Formation(5,0);
 
     for (auto &enemy : form->getEnemies()) {
@@ -59,7 +68,8 @@ int Game::run() {
         // Check collisions and run act() on relevant actors
 
         this->form->update();
-
+        this->hud1->update();
+        this->hud2->update();
         for (unsigned i = 0; i < this->actors.size(); i++) {
             if (!actors[i]->isAlive()) {
                 //Ta bort actor från vektor och avregistrera.
