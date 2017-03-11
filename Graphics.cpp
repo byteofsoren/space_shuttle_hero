@@ -2,7 +2,7 @@
 #include <iostream>
 #include <unistd.h>
 
-#define debug
+//#define debug
 
 Graphics::Graphics(int w, int h, std::string title) {
     win.create(sf::VideoMode(w,h), title);
@@ -49,7 +49,8 @@ bool Graphics::tryUpdate() {
             text.setFont(this->font);
             text.setString(cTile->text);
             text.setFillColor(sf::Color::White);
-            text.setCharacterSize(12);
+            text.setPosition(cTile->posX, cTile->posY);
+            text.setCharacterSize(20);
             win.draw(text);
         }
     }
