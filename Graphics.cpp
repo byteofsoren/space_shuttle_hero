@@ -17,9 +17,19 @@ bool Graphics::tryUpdate() {
         int tilePosX = cTile->posX;
         int tilePosY = cTile->posY;
 
-	sf::Sprite sprite;
-	sprite.setTexture(getTexture(cTile->source));
-	sprite.setPosition(tilePosX,tilePosY);
+        sf::Sprite sprite;
+        if(cTile->source.size() != 0)sprite.setTexture(getTexture(cTile->source));
+        sprite.setPosition(tilePosX,tilePosY);
+        if (cTile->width != 0 || cTile->height != 0) {
+            // If with or heigt is not 0 then specify a rectangle to render.
+            sf::IntRect spRect;
+            spRect.left = tilePosX;
+            spRect.top = tilePosY;
+            spRect.width = cTile->width;
+            spRect.height = cTile->height;
+            sprite.setTextureRect(spRect);
+            sprite.getTexture()->isRepeated();
+        }
         win.draw(sprite);
     }
     win.display();
