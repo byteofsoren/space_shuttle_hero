@@ -3,16 +3,17 @@
 #define enemy_hpp
 
 #include "Actor.hpp"
+#include "Player.hpp"
 
 class Enemy : public Actor {
-	public:
+public:
 	Enemy();
 	Enemy(int life, int damage);
 	~Enemy();
 	void act(Actor &a);
-	
-	private:
-	int life;
+    void act(Player &a);
+    
+private:
 	int damage;
 };
 

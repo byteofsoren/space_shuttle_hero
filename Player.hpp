@@ -13,7 +13,9 @@ class Player : public Actor {
         void act(Actor &a);
 	    void update();
         bool isShooting();
-	private:
+        friend class Enemy;
+    
+    private:
 	    Input input;
 };
 
