@@ -9,6 +9,8 @@ Actor::Actor() {
     collisionRadius = 15.0;
     tile.posX = 0.0;
     tile.posY = 0.0;
+    tile.height = 0;
+    tile.width = 0;
     tile.source = "genericActor.png";
     lastUpdate = std::chrono::system_clock::now();
 }

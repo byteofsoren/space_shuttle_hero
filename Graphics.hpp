@@ -6,6 +6,8 @@
 struct Tile_t{
     int posX;
     int posY;
+    int width;
+    int height;
     std::string source;
 };
 
