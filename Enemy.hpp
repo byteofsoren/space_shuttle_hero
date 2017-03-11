@@ -11,7 +11,7 @@ public:
 	Enemy(int life, int damage);
 	~Enemy();
 	void act(Actor &a);
-    void act(Player &a);
+    virtual void act(Player &a);
     
 private:
 	int damage;
