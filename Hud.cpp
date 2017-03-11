@@ -5,7 +5,7 @@ Hud::Hud(int posX, int posY) {
     this->oneTileWidth = 50;
     this->hudTile.posX = posX;
     this->hudTile.posY = posY;
-    this->hudTile.source = "gfx/health.png";
+    this->hudTile.source = "health.png";
     this->hudTile.height = 50;      // Height of the file is hard coded....
     this->hudTile.width = oneTileWidth;
 
