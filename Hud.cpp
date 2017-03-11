@@ -1,4 +1,5 @@
 #include "Hud.hpp"
+//#define debug
 
 Hud::Hud(int posX, int posY) {
     this->oneTileWidth = 50;
@@ -22,7 +23,9 @@ void Hud::update() {
     // this code sets the with of the tile based on how mutch life the actor
     // have.
     this->hudTile.width= this->act->getLife() * oneTileWidth;
+#ifdef debug
     std::cout << "Life :" << act->getLife() << "pos(x=" << hudTile.posX <<
         ", y=" <<hudTile.posY << ") size(w="<< hudTile.width << ", h="
         << hudTile.height << ")" << std::endl;
+#endif
 }
