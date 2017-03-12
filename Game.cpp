@@ -14,17 +14,20 @@ Game::Game() : renderer(800, 800, "Space Shuttle Hero") {
 }
 
 Game::~Game() {
+    for (auto a : this->actors) { // Delete all actors
+        delete a;
+    }
 }
 
 int Game::init() {
-    players.push_back(new Player{0,5});
-    p1 = (Player*)players.back();
+    actors.push_back(new Player{0,5});
+    p1 = (Player*)actors.back();
     p1->setCR(25);
     p1->setTexture("uglySpaceship.png");
     renderer.addTile(p1->getTile());
 
-    players.push_back(new Player{1,3});
-    p2 = (Player*)players.back();
+    actors.push_back(new Player{1,3});
+    p2 = (Player*)actors.back();
     p2->setCR(25);
     renderer.addTile(p2->getTile());
 
@@ -91,23 +94,20 @@ int Game::run() {
             
         // Check collisions and run act() on relevant actors
 
-        for (unsigned i = 0; i < this->actors.size(); i++) {
-            if (!actors[i]->isAlive()) {
-                //Ta bort actor från vektor och avregistrera.
-            }
-            else {
-                for (unsigned j = 0; j < this->actors.size(); j++) {
-                    if (i != j && actors[i]->collidesWith(actors[j])) {
-                        actors[i]->act(*actors[j]);
-                        //std::cout << "Crash!" << std::endl;
+        for (auto i : this->actors) {
+            if (i->isAlive()) {
+                // Check collisions with everything
+                for (auto j : this->actors) {
+                    if (j->getXPos() > -1 && j->getXPos() < 801 &&
+                        j->getYPos() > -1 && j->getYPos() < 801 &&
+                        i != j && i->collidesWith(j)) {
+                        i->act(*j);
                     }
                 }
-
-                for (size_t j = 0; j < this->players.size(); j++) {
-                    if (players[j]->collidesWith(actors[i])) {
-                        //
-                    }
-                }
+            } else {
+                // Move actors outside screen
+                i->setXPos(-100);
+                i->setYPos(-100);
             }
         }
 
@@ -117,11 +117,16 @@ int Game::run() {
             this->actors[i]->update();
         }
 
-        for (unsigned i = 0; i < this->players.size(); i++) {
-            this->players[i]->update();
-            if (players[i]->isShooting()) {
-                // Generate misile.
-            }
+        // Shoot projectiles with P1
+        
+        if (p1->isShooting()) {
+            
+        }
+
+        // Shoot projectiles with P2
+        
+        if (p2->isShooting()) {
+
         }
 
         // Update HUD

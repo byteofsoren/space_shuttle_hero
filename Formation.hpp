@@ -31,6 +31,9 @@ class Formation {
         std::vector<int> coefficients;
         bool active;
         int type;
+        Actor* pow;                       // Link to powerup actor
+        double powSpotX;
+        double powSpotY;
 };
 
 #endif

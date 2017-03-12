@@ -44,7 +44,7 @@ void Actor::update() {
     // Update actor position based on velocities
     setXPos(xPos + xVel * difference.count());
     setYPos(yPos + yVel * difference.count());
-
+    
     lastUpdate = currentClock;
 }
 

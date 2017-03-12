@@ -11,9 +11,10 @@ public:
 	Enemy(int life, int damage);
 	~Enemy();
 	void act(Actor &a);
-    virtual void act(Player &a);
+    virtual Actor::Type getType() { return Actor::enemy; }
+    //virtual void act(Player &a);
     
-private:
+protected:
 	int damage;
 };
 

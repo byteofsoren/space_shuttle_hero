@@ -39,6 +39,11 @@ void Formation::spawn(int type=0) {
     //   8     1   8  28  56  70  56  28   8   1 
     //   9   1   9  36  84 126 126  84  36   9   1 
 
+    for (auto e : this->enemies) {
+        e->setXPos(-40);
+        e->setYPos(-40);
+        e->setLife(1);
+    }
     
     switch (type) {
         case 0:
@@ -70,6 +75,7 @@ void Formation::update() {
     double t, ct, x, y;
     int i, j, n;
     const double dt = 0.2;
+    bool defeated = true;
     
     if (this->active) {
         t = ((double)this->clock.getElapsedTime().asMilliseconds() / this->end.asMilliseconds());
@@ -81,6 +87,15 @@ void Formation::update() {
             for (auto e : this->enemies) {
                 ct = t-0.2*i;
 
+                if (e->getLife() < 1) {
+                    e->setXPos(-100);
+                    e->setYPos(-100);
+                } else {
+                    this->powSpotX = e->getXPos();
+                    this->powSpotY = e->getYPos();
+                    defeated = false;
+                }
+                
                 x = 0;
                 y = 0;
                 j = 0;
@@ -100,11 +115,14 @@ void Formation::update() {
                 
                 i++;
             }
-                
-            return;
+
+            if (defeated) {
+                this->active = false;
+                this->pow->setXPos(this->powSpotX);
+                this->pow->setYPos(this->powSpotY);
+            }
         } else {
             this->active = false;
-            this->points.clear();
         }
     }
 }

@@ -13,13 +13,15 @@ class Actor {
         double collisionRadius;            // Collision radius
         std::chrono::time_point<std::chrono::system_clock> lastUpdate;               // mSec since last update()
         int life;
+        enum Type{base, player, enemy};
 
     public:
         Actor();
-        ~Actor();
+        virtual ~Actor();
         virtual void update();
         virtual void act(Actor &a);
-
+        virtual Type getType() { return base; }
+    
         bool collidesWith(Actor* other);
         bool isAlive() { return (life>0); }
 
@@ -31,6 +33,7 @@ class Actor {
         void setYPos(double value)     { yPos = value; tile.posY = value - collisionRadius; }
         void setPos(double x, double y){ setXPos(x); setYPos(y); }
         void setCR(double value)       { collisionRadius = value; }
+        void setLife(double value)     { life = value; }
 
         double getXVel()  { return xVel; }
         double getYVel()  { return yVel; }

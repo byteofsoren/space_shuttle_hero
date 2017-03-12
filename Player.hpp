@@ -13,9 +13,11 @@ class Player : public Actor {
         void act(Actor &a);
 	    void update();
         bool isShooting();
+        virtual Actor::Type getType() { return Actor::player; }
+
         friend class Enemy;
     
-    private:
+    protected:
 	    Input input;
 };
 

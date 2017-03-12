@@ -1,5 +1,6 @@
 // enemies.cpp
 #include <iostream>
+#include <typeinfo>
 #include "Enemy.hpp"
 
 // Public
@@ -17,16 +18,12 @@ Enemy::Enemy(int life, int damage) {
 Enemy::~Enemy() {
     
 }
-	
-void Enemy::act(Player &a){
-    //this->life = 0;
-    a.life -= this->damage;
-    std::cout << "Life: " << a.life << std::endl;
-    return;
-}
 
-	
 void Enemy::act(Actor &a) {
+    if (a.getType() == Actor::player) {
+        std::cout << "crash!" << std::endl;
+    }
+    
     //std::cout << "testing" << std::endl;
     
     return;
