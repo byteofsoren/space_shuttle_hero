@@ -4,18 +4,18 @@
 #include "Projectile.hpp"
 
 // Public
-	Projectile::Projectile(){
-		this->owner = 0;
-		this->damage = 0;
-	}
+Projectile::Projectile(){
+    this->owner = 0;
+    this->damage = 1;
+    this->life = 0;
+}
 	
-	Projectile::Projectile(int owner, int damage){
-		this->owner = owner;
-		this->damage = damage;
-	}
+Projectile::Projectile(int owner, int damage){
+    this->owner = owner;
+    this->damage = damage;
+}
 	
-	Projectile:: ~Projectile(){}
+Projectile:: ~Projectile(){}
 	
-	void Projectile::act(Actor &a){
-		
-	}
+void Projectile::act(Actor &a){
+}

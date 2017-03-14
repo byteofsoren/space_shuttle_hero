@@ -48,7 +48,7 @@ bool Graphics::tryUpdate() {
 #endif
             text.setFont(this->font);
             text.setString(cTile->text);
-            text.setFillColor(sf::Color::White);
+            text.setColor(sf::Color::White);
             text.setPosition(cTile->posX, cTile->posY);
             text.setCharacterSize(20);
             win.draw(text);
@@ -76,7 +76,7 @@ sf::Texture& Graphics::getTexture(std::string url)
     std::string gfx_folder = "gfx/";
     
     if (textureStore.count(url) == 0) {
-        std::cout << "Test" << std::endl;
+        std::cout << "Loading " << gfx_folder << url << std::endl;
         sf::Texture newTexture;
         newTexture.loadFromFile(gfx_folder+url);
         textureStore.insert(std::pair<std::string, sf::Texture>(url,newTexture));

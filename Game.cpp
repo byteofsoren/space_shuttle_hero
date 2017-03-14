@@ -4,6 +4,7 @@
 #include "Graphics.hpp"
 #include "Actor.hpp"
 #include "Player.hpp"
+#include "Projectile.hpp"
 
 #include <unistd.h>
 
@@ -15,21 +16,25 @@ Game::Game() : renderer(800, 800, "Space Shuttle Hero") {
 
 Game::~Game() {
     for (auto a : this->actors) { // Delete all actors
-        delete a;
+        if (a->getType() != Actor::projectile) {
+            delete a;
+        }
     }
+
+    delete[] projectiles;
+    delete hud1;
+    delete hud2;
 }
 
 int Game::init() {
     actors.push_back(new Player{0,5});
     p1 = (Player*)actors.back();
     p1->setCR(25);
-    p1->setTexture("uglySpaceship.png");
-    renderer.addTile(p1->getTile());
+    //p1->setTexture("uglySpaceship.png");
 
     actors.push_back(new Player{1,3});
     p2 = (Player*)actors.back();
     p2->setCR(25);
-    renderer.addTile(p2->getTile());
 
     this->p1->setPos(300, 200);
     this->p2->setPos(300, 100);
@@ -45,8 +50,8 @@ int Game::init() {
     renderer.addTile(this->hud1->getTextTile());
     renderer.addTile(this->hud2->getTextTile());
 
-    // === End intit ==
-
+    // === End hud init ==
+    
 
     /* Initialise formations */
     
@@ -54,10 +59,9 @@ int Game::init() {
     formations.push_back(Formation(5,1));
     formations.push_back(Formation(3,2));
     
-    for (auto form : formations) {
+    for (auto &form : formations) {
         for (auto &enemy : form.getEnemies()) {
             this->actors.push_back(enemy);
-            renderer.addTile(enemy->getTile());
         }
     }
 
@@ -68,8 +72,19 @@ int Game::init() {
     this->spawns.push(SpawnPoint(25000, (Formation*)&formations[0], 0));
     this->spawns.push(SpawnPoint(0,0,0));
 
-    this->goal = sf::seconds(30);
+    projectiles = new Projectile[200];
+
+    for (int i=0; i < 200; i++) {
+        this->actors.push_back(&projectiles[i]);
+    }
     
+    for (auto &a : this->actors) {
+        renderer.addTile(a->getTile());
+    }
+
+    
+    this->goal = sf::seconds(30);
+
     this->gameClock.restart();
     
     return 1;
@@ -77,6 +92,7 @@ int Game::init() {
 
 int Game::run() {
     SpawnPoint p = this->spawns.front();
+    int currentShot = 0;
     bool game_over = false;
     
     std::cout << p.time.asMilliseconds() << " " << p.type << " " << this->goal.asSeconds() << " " << this->gameClock.getElapsedTime().asSeconds() << std::endl;
@@ -91,7 +107,7 @@ int Game::run() {
             p = this->spawns.front();
         } 
         
-        for (auto form : formations) {
+        for (auto &form : formations) {
             form.update();
         }
             
@@ -116,14 +132,17 @@ int Game::run() {
 
         // Update actors
 
-        for (unsigned i = 0; i < this->actors.size(); i++) {
-            this->actors[i]->update();
+        for (auto &a : this->actors) {
+            a->update();
         }
 
         // Shoot projectiles with P1
         
         if (p1->isShooting()) {
-            
+            this->projectiles[currentShot].setXPos(p1->getXPos());
+            this->projectiles[currentShot].setYPos(p1->getYPos()-10);
+            this->projectiles[currentShot].setLife(1);
+            currentShot++;
         }
 
         // Shoot projectiles with P2

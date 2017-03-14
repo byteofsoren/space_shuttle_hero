@@ -13,9 +13,10 @@ class Actor {
         double collisionRadius;            // Collision radius
         std::chrono::time_point<std::chrono::system_clock> lastUpdate;               // mSec since last update()
         int life;
-        enum Type{base, player, enemy};
 
     public:
+        enum Type{base, player, enemy, projectile};
+
         Actor();
         virtual ~Actor();
         virtual void update();

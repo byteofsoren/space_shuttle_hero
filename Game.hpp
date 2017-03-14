@@ -8,6 +8,7 @@
 #include "Hud.hpp"
 
 class Player;
+class Projectile;
 
 struct SpawnPoint {
     sf::Time time;
@@ -21,10 +22,10 @@ class Game {
         Graphics renderer;
         Tile_t p1Life, p2Life;
         std::vector<Actor *> actors;
-        std::vector<Player *> players;
         std::vector<Formation> formations;
         std::queue<SpawnPoint> spawns;
         Player *p1, *p2;
+        Projectile *projectiles;
         sf::Clock gameClock;
         sf::Time goal;
         Hud *hud1, *hud2;

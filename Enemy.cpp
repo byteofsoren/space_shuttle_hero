@@ -8,6 +8,7 @@ Enemy::Enemy() {
     this->life = 1;
     this->damage = 1;
     this->collisionRadius = 25;
+    this->tile.source = "enemy.png";
 }
 	
 Enemy::Enemy(int life, int damage) {
@@ -21,7 +22,7 @@ Enemy::~Enemy() {
 
 void Enemy::act(Actor &a) {
     if (a.getType() == Actor::player) {
-        std::cout << "crash!" << std::endl;
+        //std::cout << "crash!" << std::endl;
     }
     
     //std::cout << "testing" << std::endl;
