@@ -12,12 +12,13 @@ class Player : public Actor {
 	    ~Player();
         void act(Actor &a);
 	    void update();
-        bool isShooting();
+        bool isShooting(sf::Time t);
         virtual Actor::Type getType() { return Actor::player; }
 
         friend class Enemy;
     
     protected:
+        sf::Time shotLimit;
 	    Input input;
 };
 

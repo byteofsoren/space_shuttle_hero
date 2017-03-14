@@ -13,6 +13,7 @@ class Actor {
         double collisionRadius;            // Collision radius
         std::chrono::time_point<std::chrono::system_clock> lastUpdate;               // mSec since last update()
         int life;
+        int invincible;
 
     public:
         enum Type{base, player, enemy, projectile};
@@ -26,7 +27,6 @@ class Actor {
         bool collidesWith(Actor* other);
         bool isAlive() { return (life>0); }
 
-        int getLife() { return this->life; }
         void setXVel(double value)     { xVel = value; }
         void setYVel(double value)     { yVel = value; }
         void setVel(double x, double y){ yVel = y; this->xVel = x; }
@@ -35,13 +35,16 @@ class Actor {
         void setPos(double x, double y){ setXPos(x); setYPos(y); }
         void setCR(double value)       { collisionRadius = value; }
         void setLife(double value)     { life = value; }
-
+        void setInvincible(int value)  { invincible = value; }
+    
         double getXVel()  { return xVel; }
         double getYVel()  { return yVel; }
         double getXPos()  { return xPos; }
         double getYPos()  { return yPos; }
         double getCR()    { return collisionRadius; }
         Tile_t *getTile() { return &tile; }
+        int getLife() { return this->life; }
+        int getInvincible() { return this->invincible; }
         void setTexture(std::string textureSource);
 };
 

@@ -27,7 +27,7 @@ Game::~Game() {
 }
 
 int Game::init() {
-    actors.push_back(new Player{0,5});
+    actors.push_back(new Player{0,3});
     p1 = (Player*)actors.back();
     p1->setCR(25);
     //p1->setTexture("uglySpaceship.png");
@@ -36,13 +36,13 @@ int Game::init() {
     p2 = (Player*)actors.back();
     p2->setCR(25);
 
-    this->p1->setPos(300, 200);
-    this->p2->setPos(300, 100);
+    this->p1->setPos(200, 600);
+    this->p2->setPos(600, 600);
 
     // === The huds for the player is initialized here ===
-    int hudxpos = 500;
-    this->hud1 = new Hud(50,hudxpos);
-    this->hud2 = new Hud(50*7, hudxpos);
+    int hudypos = 700;
+    this->hud1 = new Hud(50,hudypos);
+    this->hud2 = new Hud(50*7, hudypos);
     this->hud1->conectActor(*p1);
     this->hud2->conectActor(*p2);
     renderer.addTile(this->hud1->getTile());
@@ -138,17 +138,20 @@ int Game::run() {
 
         // Shoot projectiles with P1
         
-        if (p1->isShooting()) {
+        if (p1->isShooting(this->gameClock.getElapsedTime())) {
             this->projectiles[currentShot].setXPos(p1->getXPos());
             this->projectiles[currentShot].setYPos(p1->getYPos()-10);
             this->projectiles[currentShot].setLife(1);
-            currentShot++;
+            currentShot = (currentShot+1)%200;
         }
 
         // Shoot projectiles with P2
         
-        if (p2->isShooting()) {
-
+        if (p2->isShooting(this->gameClock.getElapsedTime())) {
+            this->projectiles[currentShot].setXPos(p2->getXPos());
+            this->projectiles[currentShot].setYPos(p2->getYPos()-10);
+            this->projectiles[currentShot].setLife(1);
+            currentShot = (currentShot+1)%200;
         }
 
         // Update HUD

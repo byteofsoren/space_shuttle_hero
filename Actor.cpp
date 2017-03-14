@@ -7,6 +7,8 @@ Actor::Actor() {
     xVel = 0.0;
     yVel = 0.0;
     collisionRadius = 15.0;
+    life = 0;
+    invincible = 0;
     tile.posX = 0.0;
     tile.posY = 0.0;
     tile.height = 0;

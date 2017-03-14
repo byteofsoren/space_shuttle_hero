@@ -10,6 +10,7 @@ class Projectile : public Actor {
         this->owner = 0;
         this->life = 0;
         this->damage = 1;
+        this->yVel = -300;
         this->tile.source = "shots.png";
     }
     
@@ -17,14 +18,17 @@ class Projectile : public Actor {
         this->owner = owner;
         this->life = 1;
         this->damage = damage;
+        this->yVel = -300;
         this->tile.source = "shots.png";
     }
     
-	~Projectile() { }
+   	~Projectile() { }
 
 	void act(Actor &a) {
         if (a.getType() == Actor::enemy) {
-            std::cout << "EnemyCrash!" << std::endl;
+            a.setLife(0);
+            a.setXPos(-100);
+            this->life = 0;
         }
     }
 

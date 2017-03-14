@@ -8,10 +8,13 @@ Player::Player() {
     this->input.mapKey(sf::Keyboard::Left, Input::Left);
     this->input.mapKey(sf::Keyboard::RControl, Input::Shoot);
     this->life = 4;
+    this->shotLimit = sf::milliseconds(0);
 }
 
 Player::Player(int pNum, int life) {
     this->life = life;
+    this->shotLimit = sf::milliseconds(0);
+    this->collisionRadius = 25;
 
     if (pNum == 0) {
         this->input.mapKey(sf::Keyboard::W, Input::Up);
@@ -57,9 +60,18 @@ void Player::update()
 	else
 		Actor::xVel *= 0.99;
 
+    if (invincible > 0) {
+        invincible--;
+    }
+    
 	Actor::update();
 }
 
-bool Player::isShooting() {
+bool Player::isShooting(sf::Time t) {
+    if (input.shoot() && t > shotLimit) {
+        shotLimit = t + sf::milliseconds(200);
+        return true;
+    }
+
     return false;
 }
