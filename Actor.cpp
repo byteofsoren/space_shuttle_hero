@@ -2,7 +2,7 @@
 #include <chrono>
 
 Actor::Actor() {
-    xPos = 0.0;
+    xPos = -100.0;
     yPos = 0.0;
     xVel = 0.0;
     yVel = 0.0;

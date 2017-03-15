@@ -1,10 +1,13 @@
 #include <iostream>
 #include <cmath>
+#include <random>
+#include <functional>
 #include "Game.hpp"
 #include "Graphics.hpp"
 #include "Actor.hpp"
 #include "Player.hpp"
 #include "Projectile.hpp"
+#include "Powerup.hpp"
 
 #include <unistd.h>
 
@@ -27,6 +30,10 @@ Game::~Game() {
 }
 
 int Game::init() {
+    std::default_random_engine gen;
+    std::uniform_int_distribution<int> dist(0,9);
+    auto randPow = std::bind(dist, gen);
+    
     actors.push_back(new Player{0,3});
     p1 = (Player*)actors.back();
     p1->setCR(25);
@@ -51,7 +58,24 @@ int Game::init() {
     renderer.addTile(this->hud2->getTextTile());
 
     // === End hud init ==
+
+    /* Initialise powerups */
     
+    for (int i=0; i < 10; i++) {
+        if (i < 2) {
+            powerups[i] = new Invincibility;
+        } else {
+            powerups[i] = new Life;
+        }
+
+        this->actors.push_back(powerups[i]);
+    }
+
+    // Mix the powerups
+
+    for (int i=0; i < 10; i++) {
+        std::swap(powerups[i],powerups[randPow()]);
+    }
 
     /* Initialise formations */
     
@@ -65,19 +89,19 @@ int Game::init() {
         }
     }
 
-    this->spawns.push(SpawnPoint(1500, (Formation*)&formations[0], 2));
-    this->spawns.push(SpawnPoint(5000, (Formation*)&formations[1], 1));
-    this->spawns.push(SpawnPoint(10000, (Formation*)&formations[2], 0));
-    this->spawns.push(SpawnPoint(20000, (Formation*)&formations[1], 2));
-    this->spawns.push(SpawnPoint(25000, (Formation*)&formations[0], 0));
-    this->spawns.push(SpawnPoint(0,0,0));
+    this->spawns.push(SpawnPoint(1500, (Formation*)&formations[0], 2, powerups[0]));
+    this->spawns.push(SpawnPoint(5000, (Formation*)&formations[1], 1, powerups[1]));
+    this->spawns.push(SpawnPoint(10000, (Formation*)&formations[2], 0, powerups[2]));
+    this->spawns.push(SpawnPoint(20000, (Formation*)&formations[1], 2, powerups[3]));
+    this->spawns.push(SpawnPoint(25000, (Formation*)&formations[0], 0, powerups[4]));
+    this->spawns.push(SpawnPoint(0,0,0,0));
 
     projectiles = new Projectile[200];
 
     for (int i=0; i < 200; i++) {
         this->actors.push_back(&projectiles[i]);
     }
-    
+
     for (auto &a : this->actors) {
         renderer.addTile(a->getTile());
     }
@@ -102,7 +126,7 @@ int Game::run() {
         // Spawn any formations
         
         if (p.formation != 0 && p.time < this->gameClock.getElapsedTime()) {
-            p.formation->spawn(p.type);
+            p.formation->spawn(p.type, p.pow);
             this->spawns.pop();
             p = this->spawns.front();
         } 

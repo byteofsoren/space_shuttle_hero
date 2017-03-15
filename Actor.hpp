@@ -16,7 +16,7 @@ class Actor {
         int invincible;
 
     public:
-        enum Type{base, player, enemy, projectile};
+        enum Type{base, player, enemy, projectile, powerup};
 
         Actor();
         virtual ~Actor();

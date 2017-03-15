@@ -18,7 +18,7 @@ class Formation {
         Formation();
         Formation(int size, int enemyType);
         ~Formation();
-        void spawn(int type);
+    void spawn(int type, Actor* p);
         void update();
 
         std::vector<Actor*> getEnemies() { return enemies; }

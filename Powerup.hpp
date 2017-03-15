@@ -7,24 +7,38 @@
 
 class Powerup : public Actor {
 	public:
-	Powerup();
-	~Powerup();
-	void act(Actor &a);
-	
+        Powerup() { this->tile.source = "powerup.png"; }
+        ~Powerup() { }
+        void act(Actor &a) { }
+        virtual Actor::Type getType() { return powerup; }
 };
 
 class Life : public Powerup {
 	public:
-	Life();
-	~Life();
-	void act(Actor &a);
-}
+        Life() { this->tile.source = "life.png"; }
+        ~Life() { }
+        void act(Actor &a) {
+            if (a.getType() == Actor::player) {
+                a.setLife(a.getLife()+1);
+                this->life=0;
+                this->xPos = -100;
+                this->yPos = -100;
+            }
+        }
+};
 
-class Ammo : public Powerup {
+class Invincibility : public Powerup {
 	public:
-	Ammo();
-	~Ammo();
-	void act(Actor &a);
-}
+        Invincibility() { this->tile.source = "invincible.png"; }
+        ~Invincibility() { }
+        void act(Actor &a) {
+            if (a.getType() == Actor::player) {
+                a.setInvincible(500);
+                this->life = 0;
+                this->xPos = -100;
+                this->yPos = -100;
+            }
+        }
+};
 
 #endif

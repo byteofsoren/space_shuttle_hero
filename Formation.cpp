@@ -19,7 +19,7 @@ Formation::Formation(int size, int enemyType) : Formation() {
 
 Formation::~Formation() { }
 
-void Formation::spawn(int type=0) {
+void Formation::spawn(int type=0, Actor *p=0) {
     this->type = type;
     this->active = true;
     this->points.clear();
@@ -66,6 +66,10 @@ void Formation::spawn(int type=0) {
             break;
         default:
             break;
+    }
+
+    if (p) {
+        this->pow = p;
     }
     
     this->clock.restart();
@@ -116,10 +120,13 @@ void Formation::update() {
                 i++;
             }
 
-            if (defeated) {
+            if (defeated && this->pow) {
+                std::cout << "derp!" << std::endl;
                 this->active = false;
                 this->pow->setXPos(this->powSpotX);
                 this->pow->setYPos(this->powSpotY);
+                this->pow->setLife(1);
+                this->pow = 0;
             }
         } else {
             this->active = false;
