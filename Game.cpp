@@ -49,7 +49,7 @@ int Game::init() {
     // === The huds for the player is initialized here ===
     int hudypos = 700;
     this->hud1 = new Hud(50,hudypos);
-    this->hud2 = new Hud(50*7, hudypos);
+    this->hud2 = new Hud(50*8, hudypos);
     this->hud1->conectActor(*p1);
     this->hud2->conectActor(*p2);
     renderer.addTile(this->hud1->getTile());

@@ -121,7 +121,6 @@ void Formation::update() {
             }
 
             if (defeated && this->pow) {
-                std::cout << "derp!" << std::endl;
                 this->active = false;
                 this->pow->setXPos(this->powSpotX);
                 this->pow->setYPos(this->powSpotY);

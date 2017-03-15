@@ -7,7 +7,10 @@
 
 class Powerup : public Actor {
 	public:
-        Powerup() { this->tile.source = "powerup.png"; }
+         Powerup() {
+             this->tile.source = "powerup.png";
+             this->collisionRadius = 25;
+         }
         ~Powerup() { }
         void act(Actor &a) { }
         virtual Actor::Type getType() { return powerup; }
